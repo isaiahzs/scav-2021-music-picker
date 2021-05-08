@@ -221,7 +221,7 @@ function play_bite(bitename) {
       i.textContent = "▷"
     }
   } else {
-    i.active_sound = new Audio("music_files/files/" + bitename + ".mp3")
+    i.active_sound = new Audio("music_files/" + bitename + ".mp3")
     i.active_sound.load();
     i.active_sound.play();
     i.textContent = "||"
