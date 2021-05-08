@@ -236,6 +236,11 @@ function play_bite(bitename) {
       running_bite_elem.textContent = "▷"
     }
     i.active_sound = new Audio("music_files/" + bitename + ".mp3")
+    i.active_sound.onended = (event) => {
+      running_bite = null;
+      running_bite_elem = null;
+      i.textContent = "▷"
+    }
     running_bite = i.active_sound
     running_bite_elem = i;
     i.active_sound.load();
