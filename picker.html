@@ -208,20 +208,36 @@ button.disabled:hover {
 <body>
 
 <script>
+var running_bite = null;
+var running_bite_elem = null;
 function play_bite(bitename) {
   i = event.target;
   console.log(i)
   if (i.active_sound) {
     if (i.active_sound.paused) {
+      if (running_bite) {
+        running_bite.pause()
+        running_bite_elem.textContent = "▷"
+      }
+      running_bite = i.active_sound
+      running_bite_elem = i;
       i.active_sound.load();
       i.active_sound.play();
       i.textContent = "||"
     } else {
       i.active_sound.pause()
       i.textContent = "▷"
+      running_bite = null;
+      running_bite_elem = null;
     }
   } else {
+    if (running_bite) {
+      running_bite.pause()
+      running_bite_elem.textContent = "▷"
+    }
     i.active_sound = new Audio("music_files/" + bitename + ".mp3")
+    running_bite = i.active_sound
+    running_bite_elem = i;
     i.active_sound.load();
     i.active_sound.play();
     i.textContent = "||"
@@ -241,7 +257,14 @@ function play_bite(bitename) {
 
 <p id="buttons"><button id="pick">Pick</button> <button id="pass">Pass</button> <button id="undo">Undo</button> <button id="redo">Redo</button></p>
 </div>
-
+<script>
+document.getElementById("buttons").addEventListener("click", function(e) {
+  running_bite.pause()
+  running_bite_elem.textContent = "▷"
+  running_bite = null;
+  running_bite_elem = null;
+})
+</script>
 <div id="secondary">
 <h2>Found favorites</h2>
 
