@@ -466,7 +466,7 @@
          */
         var itemContent;
         var itemName;
-        itemName = item.name || item.id;
+        itemName = item.Title || item.name || item.id;
         if (this.options.getItemElem) {
             return $(this.options.getItemElem(item, settings)).addClass('item').data('item', item.id);
         }
@@ -474,7 +474,7 @@
             itemContent = $('<img src="' + (this.options.getItemImageUrl ? this.options.getItemImageUrl(item, settings) : item.image) + '" alt="' + itemName + '" title="' + itemName + '">');
         }
         else {
-            itemContent = $('<span>' + itemName + '</span>');
+            itemContent = $('<span>' + itemName + '<span onclick="play_bite(\''+ item.id+'\')">▷</span></span>');
         }
         return this.wrapItem(itemContent).addClass('item').data('item', item.id);
     };
