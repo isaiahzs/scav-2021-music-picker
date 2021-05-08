@@ -466,6 +466,8 @@
          */
         var itemContent;
         var itemName;
+        var itemComposer;
+        itemComposer = item.Composer;
         itemName = item.Title || item.name || item.id;
         if (this.options.getItemElem) {
             return $(this.options.getItemElem(item, settings)).addClass('item').data('item', item.id);
@@ -474,7 +476,7 @@
             itemContent = $('<img src="' + (this.options.getItemImageUrl ? this.options.getItemImageUrl(item, settings) : item.image) + '" alt="' + itemName + '" title="' + itemName + '">');
         }
         else {
-            itemContent = $('<span>' + itemName + '<span onclick="play_bite(\''+ item.id+'\')">▷</span></span>');
+            itemContent = $('<div><span class="play-btn" onclick="play_bite(\''+ item.id+'\')">▷</span> <span class="desc">' + itemName + ' - ' + itemComposer + '</span></div>');
         }
         return this.wrapItem(itemContent).addClass('item').data('item', item.id);
     };
